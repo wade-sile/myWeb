@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.OrderItemMapper">
+	<update id="insOrderitem">
+		insert into orderitem values
+		<trim suffixOverrides=",">
+			<foreach collection="userCartList" item="cartItem">
+				(default,#{cartItem.pcount},#{cartItem.ptotal},#{cartItem.pid},#{oid},#{cartItem.pname},#{cartItem.image},#{cartItem.price}),
+			</foreach>
+		</trim>
+	</update>
+</mapper>

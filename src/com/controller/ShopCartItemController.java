@@ -58,6 +58,8 @@ public class ShopCartItemController {
 	public String userCartShow(HttpServletRequest req) {
 		int uid = ((User)req.getSession().getAttribute("loginUser")).getUid();
 		List<ShopCartItem> cartList = shopCartItemServiceImpl.showUserCart(uid);
+		if(cartList.size()==0)
+			return "redirect:cart.jsp";
 		double money=0;
 		for (ShopCartItem shopCartItem : cartList) {
 			money+=shopCartItem.getPtotal();

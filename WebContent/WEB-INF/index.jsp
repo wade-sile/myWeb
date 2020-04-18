@@ -57,14 +57,18 @@
 					<strong>热门商品</strong>
 				</div> 
 				<ul>
-					<c:forEach items="${proList}" var="product">
-						<c:if test="${product.is_hot==1 }">
-							<li><a href="product?pid=${product.pid }" target="_blank">
-							 <img src="${product.image}" width="170px" height="170px" style="display: inline-block;"/>
-								<span
-									style='color: green;align:center;'>${product.pname }</span><span class="price">
-										商城价：${product.shop_price } </span>
-							</a></li>
+					<c:set var="i" value="${1 }"></c:set>
+					<c:forEach items="${proList}" var="product" varStatus="sta">
+						<c:if test="${i<=4 }">
+							<c:if test="${product.is_hot==1 }">
+								<c:set var="i" value="${i+1 }"></c:set>
+								<li><a href="product?pid=${product.pid }" target="_blank">
+								 <img src="${product.image}" width="170px" height="170px" style="display: inline-block;"/>
+									<span
+										style='color: green;align:center;'>${product.pname }</span><span class="price">
+											商城价：${product.shop_price } </span>
+								</a></li>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</ul>
@@ -110,4 +114,5 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 </html>

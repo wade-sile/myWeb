@@ -11,32 +11,27 @@
 					</c:if>
 					<c:if test="${loginUser!=null }">
 						<li id="headerLogin" class="headerLogin" style="display: list-item;">
-							您好：${loginUser.getUsername() }!欢迎进入
+							您好：${loginUser.getUsername() }!欢迎进入 |
 						</li>
 					</c:if>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
 						<a href="regist.jsp">注册</a>|</li>
-						<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="" style="color: red;">留言板</a>
-				   |</li>
-					<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					</li>
+						<!-- <li id="headerLogin" class="headerLogin" style="display: list-item;">
+					<a href="#" style="color: red;">留言板</a>
+				   |</li> -->
 					<c:if test="${loginUser!=null }">
+					    <li class="cart" style="margin-left: -10px;">
+							<a href="cartAdd">购物车</a>
+						|</li>
 						<li id="headerLogin" class="headerLogin" style="display: list-item;">
 						<a href="order" style="color: red;">我的订单</a>
-				   |</li>
+					   |</li>
+						<li id="headerLogout" class="headerLogout" style="display: list-item;">
+						<a href="loginOut" onclick="return confirm('确定要退出登录吗？')">退出</a></li>
+						<li>
+						</li>
 					</c:if>
-				   <li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="" style="color: red;">留言板</a>
-				   |</li>
-				   <c:if test="${loginUser!=null }">
-				    <div class="cart">
-						<a href="cartAdd">购物车</a>
-					</div>
-					</c:if>
-					<li id="headerLogout" class="headerLogout" style="display: list-item;">
-					<a href="loginOut" onclick="return confirm('确定要退出登录吗？')">退出</a>|</li>
-			<li><a href="">后台登录</a></li>
+			<!-- <li><a href="#">后台登录</a></li> -->
 		</ul>
 	</div>
 	

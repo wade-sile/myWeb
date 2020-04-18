@@ -19,7 +19,7 @@ public class ProductController {
 	private ProductService productServiceImpl;
 	
 	/**
-	 * ³õÊ¼»¯Ò³Ãæ
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½Ò³ï¿½ï¿½
 	 * @param session
 	 * @return
 	 */
@@ -31,7 +31,7 @@ public class ProductController {
 	}
 	
 	/**
-	 * ·ÃÎÊÍ¼Æ¬ÉÌÆ·
+	 * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Æ·
 	 * @return
 	 */
 	@RequestMapping("/product")
@@ -39,19 +39,19 @@ public class ProductController {
 		Product product = productServiceImpl.selByPid(pid);
 		System.out.println(product);
 		if(product==null) {
-			System.out.println("Ã»ÓĞ´ËId¼ÇÂ¼£¬ÇëÖØĞÂ³¢ÊÔ£¡");
+			System.out.println("æŸ¥æ‰¾ç‰©å“å¤±è´¥ï¼");
 		}
 		model.addAttribute("product", product);
 		return "product.jsp";
 	}
 	
 	/**
-	 * ËÑË÷ÉÌÆ·ĞÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 */
 	@RequestMapping("selByProductName")
 	public String selProduct(String condition,HttpSession session) {
 		condition=condition.trim();
-		if(condition.equals("ÇëÊäÈë¹Ø¼ü´Ê"))
+		if(condition.equals("è¯·è¾“å…¥å…³é”®è¯"))
 			condition="";
 		List<Product> showProductName = productServiceImpl.showProductName(condition);
 		session.setAttribute("proList", showProductName);

@@ -18,23 +18,23 @@ public class LoginController {
 	private ProductService productServiceImpl;
 	
 	/**
-	 * ÓÃ»§µÇÂ¼
+	 * ï¿½Ã»ï¿½ï¿½ï¿½Â¼
 	 * @return
 	 */
 	@RequestMapping("login")
 	public String login(String username,String password,HttpSession session,Model model) {
 		User user = userServiceImpl.show(username, password);
-		//µÇÂ¼ÑéÖ¤
+		//ï¿½ï¿½Â¼ï¿½ï¿½Ö¤
 		if(user==null) {
-			model.addAttribute("msg", "ÕËºÅ»òÕßÃÜÂë´íÎó");
+			model.addAttribute("msg", "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
 			return "login.jsp";
 		}
 		session.setAttribute("loginUser", user);
-		return "redirect:index.jsp";
+		return "index.jsp";
 	}
 	
 	/**
-	   *  ÍË³öµÇÂ¼
+	   *  ï¿½Ë³ï¿½ï¿½ï¿½Â¼
 	 * @return
 	 */
 	@RequestMapping("loginOut")

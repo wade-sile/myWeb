@@ -43,8 +43,8 @@ public class OrderItemController {
 		int index = orderItemServiceImpl.insOrdersList(userCartList,oid);
 		System.out.println(index);
 		if(index<1) {
-			System.out.println("¶©µ¥Ìí¼ÓÊ§°Ü£¡");
-			return "redirect:index.jsp";
+			System.out.println("æ·»åŠ è´­ç‰©è½¦å¤±è´¥ï¼");
+			return "index.jsp";
 		}
 		req.getSession().removeAttribute("oid");
 		return "delUserCart";
@@ -55,8 +55,8 @@ public class OrderItemController {
 		int uid = ((User)req.getSession().getAttribute("loginUser")).getUid();
 		int index = shopCartItemServiceImpl.delUserCarts(uid);
 		if(index<1) {
-			System.out.println("Çå¿Õ¹ºÎï³µÊ§°Ü£¡");
-			return "redirect:index.jsp";
+			System.out.println("æ¸…é™¤è´­ç‰©è½¦å¤±è´¥ï¼");
+			return "index.jsp";
 		}
 		return "orderList.jsp";
 	}

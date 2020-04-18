@@ -1,12 +1,18 @@
 package com.test;
 
 
+import java.util.List;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.pojo.User;
+import com.service.impl.UserServiceImpl;
 import com.util.MD5Util;
 
 
 public class Test {
+	
+	
 	@org.junit.Test
 	public  void beanlifeTest(){
 	    ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");

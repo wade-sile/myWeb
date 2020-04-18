@@ -22,18 +22,18 @@ public class CategoryController {
 			category.setCsList(categoryServiceImpl.showCategorySecond(category.getCid()));
 		}
 		req.getSession().setAttribute("categoryList", categoryList);
-		return "redirect:index.jsp";
+		return "index.jsp";
 	}
 	@RequestMapping("csProduct")
 	private String csProduct(int id,HttpServletRequest req) {
 		List<Product> proList = categoryServiceImpl.selByCsId(id);
 		req.getSession().setAttribute("proList", proList);
-		return "redirect:index.jsp";
+		return "index.jsp";
 	}
 	@RequestMapping("cProduct")
 	private String cProduct(int id,HttpServletRequest req) {
 		List<Product> proList = categoryServiceImpl.showByCid(id);
 		req.getSession().setAttribute("proList", proList);
-		return "redirect:index.jsp";
+		return "index.jsp";
 	}
 }

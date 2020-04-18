@@ -20,7 +20,7 @@ public class ShopCartItemController {
 	@Resource
 	private ProductService productServiceImpl;
 	/**
-	 * Ìí¼ÓÉÌÆ·µ½¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï³µ
 	 * @return
 	 */
 	@RequestMapping("cartAdd")
@@ -35,7 +35,7 @@ public class ShopCartItemController {
 			shopOne.setPtotal(product.getShop_price()*shopOne.getPcount());
 			int index = shopCartItemServiceImpl.updCartOne(shopOne);
 			if(index<1) {
-				System.out.println("¸üÐÂÊ§°Ü");
+				System.out.println("ç´¯åŠ å•†å“åˆ°è´­ç‰©è½¦å¤±è´¥ï¼");
 			}
 			return "cartShow";
 		}
@@ -49,7 +49,7 @@ public class ShopCartItemController {
 		shopCI.setPtotal(product.getShop_price()*count);
 		int index = shopCartItemServiceImpl.insSCI(shopCI);
 		if(index<1) {
-			System.out.println("¼ÓÈë¹ºÎï³µÊ§°Ü!");
+			System.out.println("æ·»åŠ å•†å“åˆ°è´­ç‰©è½¦å¤±è´¥ï¼");
 		}
 		return "cartShow";
 	}
@@ -59,7 +59,7 @@ public class ShopCartItemController {
 		int uid = ((User)req.getSession().getAttribute("loginUser")).getUid();
 		List<ShopCartItem> cartList = shopCartItemServiceImpl.showUserCart(uid);
 		if(cartList.size()==0)
-			return "redirect:cart.jsp";
+			return "cart.jsp";
 		double money=0;
 		for (ShopCartItem shopCartItem : cartList) {
 			money+=shopCartItem.getPtotal();
@@ -74,10 +74,10 @@ public class ShopCartItemController {
 		int uid = ((User)req.getSession().getAttribute("loginUser")).getUid();
 		int index = shopCartItemServiceImpl.delUserCarts(uid);
 		if(index<1) {
-			System.out.println("Çå¿Õ¹ºÎï³µÊ§°Ü£¡");
-			return "redirect:index.jsp";
+			System.out.println("æ¸…é™¤è´­ç‰©è½¦å¤±è´¥");
+			return "index.jsp";
 		}
-		req.setAttribute("msg", "Çå¿Õ¹ºÎï³µ³É¹¦");
+		req.setAttribute("msg", "æ¸…é™¤è´­ç‰©è½¦æˆåŠŸï¼");
 		return "cart.jsp";
 	}
 	
@@ -85,7 +85,7 @@ public class ShopCartItemController {
 	public String delCartItem(int cartitemid) {
 		int index = shopCartItemServiceImpl.delCartItem(cartitemid);
 		if(index<1) {
-			System.out.println("É¾³ýÉÌÆ·Ê§°Ü£¡");
+			System.out.println("åˆ é™¤å•ä»¶å•†å“å¤±è´¥ï¼");
 		}
 		return "cartShow";
 	}

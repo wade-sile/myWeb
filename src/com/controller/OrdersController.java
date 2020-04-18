@@ -20,7 +20,7 @@ public class OrdersController {
 	@Resource
 	private ShopCartItemService shopCartItemServiceImpl;
 	/**
-	 * ¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	double money=0;
@@ -47,7 +47,7 @@ public class OrdersController {
 		int index = ordersServiceImpl.insOrder(order);
 		System.out.println(index);
 		if(index<1) {
-			System.out.println("ÏÂµ¥Ê§°Ü£¡");
+			System.out.println("ä¸‹å•å¤±è´¥ï¼");
 			return "index.jsp";
 		}
 		return "orderSuccess";

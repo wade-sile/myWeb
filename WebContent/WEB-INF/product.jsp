@@ -113,7 +113,7 @@
 					<dd>件</dd>
 				</dl>
 				<div class="buy">
-					<input id="addCart" class="addCart" value="加入购物车"  ${loginUser==null?'disabled="disabled"':'' } type="submit" title="点击加入购物车"/>
+					<input id="addCart" class="addCart" value="加入购物车"  ${loginUser==null?'onclick="alertMsg()"':'' } type="submit" title="点击加入购物车"/>
 				</div>
 			</div>
 			</form>
@@ -166,6 +166,11 @@
 			if(count.value.match(/^\d+/) && count.value>1)
 				count.value=parseInt(count.value)-1;
 			else count.value=1;
+		}
+		function alertMsg(){
+			alert("请先登录！！！");
+			window.location.href="login.jsp";
+			document.getElementById('addCart').disabled='disabled';
 		}
 	</script>
 </body>

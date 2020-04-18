@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -15,26 +16,35 @@ public class UserController {
 	private UserService userServiceImpl;
 	
 	/**
-	   * ÓÃ»§×¢²á
+	   * ï¿½Ã»ï¿½×¢ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping("insUser")
 	public String insUser(User user,String rePassword,Model model) {
 		if(!user.getPassword().equals(rePassword)||rePassword.equals("")) {
-			model.addAttribute("msg", "Á½´ÎÊäÈëµÄÃÜÂë²»ÕıÈ·");
+			model.addAttribute("msg", "è¯·è¾“å…¥å¯†ç ï¼");
 			return "regist.jsp";
 		}
 		String check = "\\w*\\@[A-z0-9]+\\.[A-z]+";
 		boolean matches = Pattern.matches(check, user.getEmail());
 		if(!matches) {
-			model.addAttribute("msg", "ÓÊÏäÊäÈëÓĞÎó");
+			model.addAttribute("msg", "è¯·è¾“å…¥æœ‰æ•ˆçš„é‚®ç®±ï¼");
 			return "regist.jsp";
 		}
 		int index = userServiceImpl.insUser(user);
 		if(index==0) {
-			System.out.println("×¢²áÊ§°Ü");
+			System.out.println("æ³¨å†Œå¤±è´¥ï¼è¯·é‡è¯•ï¼");
 		}
-		System.out.println("×¢²á³É¹¦");
 		return "redirect:login.jsp";
 	}
+	
+	@RequestMapping("show")
+	public String showUser() {
+		List<User> showUser = userServiceImpl.showUser();
+		for(User user:showUser) {
+			System.out.println(user);
+		}
+		return "index.jsp";
+	}
+	
 }

@@ -26,7 +26,7 @@
 					title="正品保障"/>
 			</div>
 		</div>
-		<%@ include file="menu.jsp"%>
+		<%@ include file="/WEB-INF/menu.jsp"%>
 
 	</div>
 	<div class="container login">

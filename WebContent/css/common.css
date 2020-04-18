@@ -788,7 +788,7 @@ div.header .topNav li {
 }
 
 div.header .topNav li a {
-	margin: 0px 6px;
+	margin: 0px 5px;
 }
 
 div.header .headerLogin, div.header .headerRegister, div.header .headerUsername, div.header .headerLogout {
@@ -797,14 +797,12 @@ div.header .headerLogin, div.header .headerRegister, div.header .headerUsername,
 
 div.header .cart {
 	width: 60px;
-	height: 28px;
 	line-height: 28px;
 	_display: inline;
 	float: left;
-	padding-left: 30px;
-	margin-left: 80px;
+	/* padding-left: 30px; */
 	margin-bottom: 4px;
-	background: url(../images/common.gif) -210px -180px no-repeat;
+	background: url(../images/common.gif) -200px -180px no-repeat;
 }
 
 div.header .phone {

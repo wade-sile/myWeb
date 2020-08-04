@@ -45,11 +45,10 @@ public class OrdersController {
 //		}
 		order.setMoney(money);
 		int index = ordersServiceImpl.insOrder(order);
-		System.out.println(index);
 		if(index<1) {
 			System.out.println("下单失败！");
 			return "index.jsp";
 		}
-		return "orderSuccess";
+		return "../orderSuccess";
 	}
 }

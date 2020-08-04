@@ -26,7 +26,7 @@ public class ShopCartItemController {
 	@RequestMapping("cartAdd")
 	public String  cartAdd(Integer pid,Integer count,HttpServletRequest req) {
 		if(pid==null||pid==0)
-			return "cartShow";
+			return "../cartShow";
 		int uid = ((User)(req.getSession().getAttribute("loginUser"))).getUid();
 		ShopCartItem shopOne = shopCartItemServiceImpl.showCartOne(uid, pid);
 		Product product = productServiceImpl.selByPid(pid);
@@ -37,7 +37,7 @@ public class ShopCartItemController {
 			if(index<1) {
 				System.out.println("累加商品到购物车失败！");
 			}
-			return "cartShow";
+			return "../cartShow";
 		}
 		ShopCartItem shopCI = new ShopCartItem();
 		shopCI.setUid(((User)req.getSession().getAttribute("loginUser")).getUid());
@@ -48,10 +48,11 @@ public class ShopCartItemController {
 		shopCI.setPrice(product.getShop_price());
 		shopCI.setPtotal(product.getShop_price()*count);
 		int index = shopCartItemServiceImpl.insSCI(shopCI);
+		System.out.println(0);
 		if(index<1) {
 			System.out.println("添加商品到购物车失败！");
 		}
-		return "cartShow";
+		return "../cartShow";
 	}
 	
 	@RequestMapping("cartShow")
@@ -87,6 +88,6 @@ public class ShopCartItemController {
 		if(index<1) {
 			System.out.println("删除单件商品失败！");
 		}
-		return "cartShow";
+		return "../cartShow";
 	}
 }

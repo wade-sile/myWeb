@@ -3,6 +3,7 @@ package com.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 
 import com.pojo.User;
@@ -16,4 +17,8 @@ public interface UserMapper {
 	
 	@Select("select * from user")
 	List<User> selUser();
+	
+	@Select("select DISTINCT username from user where username=#{0}")
+	@ResultType(String.class)
+	String isUser(String username);
 }

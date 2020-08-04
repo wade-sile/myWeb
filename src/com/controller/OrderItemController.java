@@ -30,7 +30,7 @@ public class OrderItemController {
 		req.setAttribute("userCartList", userCartList);
 		req.setAttribute("order", order);
 		req.getSession().setAttribute("oid", order.getOid());
-		return "insOrderItem";
+		return "../insOrderItem";
 	}
 	@RequestMapping("insOrderItem")
 	public String insOrderItem(HttpServletRequest req) {
@@ -41,13 +41,12 @@ public class OrderItemController {
 			System.out.println(shopCartItem);
 		}
 		int index = orderItemServiceImpl.insOrdersList(userCartList,oid);
-		System.out.println(index);
 		if(index<1) {
 			System.out.println("添加购物车失败！");
 			return "index.jsp";
 		}
 		req.getSession().removeAttribute("oid");
-		return "delUserCart";
+		return "../delUserCart";
 	}
 	
 	@RequestMapping("delUserCart")

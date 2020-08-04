@@ -800,7 +800,7 @@ div.header .cart {
 	line-height: 28px;
 	_display: inline;
 	float: left;
-	/* padding-left: 30px; */
+	padding-left: 30px;
 	margin-bottom: 4px;
 	background: url(../images/common.gif) -200px -180px no-repeat;
 }

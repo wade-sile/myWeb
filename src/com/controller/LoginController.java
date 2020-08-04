@@ -27,7 +27,7 @@ public class LoginController {
 		//��¼��֤
 		if(user==null) {
 			model.addAttribute("msg", "用户名或密码错误！");
-			return "login.jsp";
+			return "redirect:login.jsp";
 		}
 		session.setAttribute("loginUser", user);
 		return "index.jsp";

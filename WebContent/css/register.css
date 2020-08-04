@@ -41,6 +41,10 @@ div.register table {
 	float: left;
 	margin-top: 20px;
 }
+div.register td {
+	width: 300px;
+	float: left;
+}
 
 div.register th {
 	width: 80px;

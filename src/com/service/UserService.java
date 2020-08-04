@@ -9,4 +9,6 @@ public interface UserService {
 	
 	int insUser(User user);
 	List<User> showUser();
+	
+	String isUser(String username);
 }

@@ -10,6 +10,12 @@
 <link href="css/register.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 </script>
+<style type="text/css">
+div.register td {
+	width: 300px;
+	float: left;
+}
+</style>
 </head>
 <body>
 	<div class="container header">
@@ -26,7 +32,7 @@
 					width="320" height="50" alt="正品保障" title="正品保障"/>
 			</div>
 		</div>
-		<%@ include file="menu.jsp"%>
+		<%@ include file="WEB-INF/menu.jsp"%>
 
 	</div>
 	<div class="container register">
@@ -36,7 +42,7 @@
 					<div class="title">
 						<strong>会员注册</strong>USER REGISTER
 					</div>
-					<form id="registerForm" method="post" action="insUser">
+					<form id="registerForm">
 						<table>
 							<tbody>
 								<tr>
@@ -44,19 +50,21 @@
 									<td><input type="text" id="username" name="username"
 										class="text" maxlength="20"/>
 											<span id="span1" style="color:green;"></span></td>
+									<td class="fieldWarn" id="usernametips">
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>密&nbsp;&nbsp;码:</th>
 									<td><input type="password" id="password" name="password"
 										class="text" maxlength="20" autocomplete="off"/></td>
+									<td class="fieldWarn" id="passwordtips">
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>确认密码:</th>
 									<td>
-									<span style="color:red;">${msg }</span><br/>
 									<input type="password" id="rePassword"
 										name="rePassword" class="text" maxlength="20"
 										autocomplete="off"/></td>
+									<td class="fieldWarn" id="rePasswordtips">
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>E-mail:</th>
@@ -64,27 +72,30 @@
 										class="text" maxlength="200"/>
 										<span style="color:red;"><s:fielderror fieldName="email"></s:fielderror></span>
 									</td>
+									<td class="fieldWarn" id="emailtips">
 								</tr>
 								<tr>
 									<th>姓名:</th>
-									<td><input type="text" name="name" class="text"
+									<td><input type="text" id="name" name="name" class="text"
 										maxlength="200"/></td>
+									<td class="fieldWarn" id="nametips">
 								</tr>
 								<tr>
 									<th>电话:</th>
-									<td><input type="text" name="phone" class="text"/></td>
+									<td><input type="text" id="phone" name="phone" class="text"/></td>
+									<td class="fieldWarn" id="phonetips">
 								</tr>
 
 								<tr>
 									<th>地址:</th>
-									<td><input type="text" name="addr" class="text"
+									<td><input type="text" id="addr" name="addr" class="text"
 										maxlength="200"/>
-										<span style="color:red;"><s:fielderror fieldName="addr"></s:fielderror></span>
 									</td>
+									<td class="fieldWarn" id="addrtips">
 								</tr>
 								<tr>
 									<th>&nbsp;</th>
-									<td><input type="submit" class="submit" value="同意以下协议并注册"/></td>
+									<td><input type="button" id="submit" class="submit" value="同意以下协议并注册"/></td>
 								</tr>
 								<tr>
 									<th>&nbsp;</th>
@@ -261,4 +272,199 @@
 		
 	</div>
 </body>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+var usernameErr = true;
+var passwordErr = true;
+var rePasswordErr = true;
+var emailErr = true;
+var phoneErr = true;
+var nameErr = true;
+var addrErr = true;
+$(document).ready(function(){
+	$("#username").focus(function(){
+		var usernametips=$("#usernametips");
+		usernametips.html("用户名由3到15个字符组成！");
+		usernametips.css("color","red");
+	});
+	$("#username").blur(function(){
+		var username = escape($("#username").val());
+			var usernametips=$("#usernametips");
+		if(username.length<3||username.length>15){
+			usernametips.html("您输入的用户名不合法！");
+			usernametips.css("color","red");
+			usernameErr = true;
+		}else {
+			$.ajax({
+				type : "POST",
+				url	 : "isUser",
+				dataType : "json",
+				data : {
+					username : $("#username").val()
+				},
+				success : function(data){
+					if(data==0){
+						usernametips.html("用户名已存在！");
+						usernametips.css("color","red");
+						usernameErr = true;
+					}else if(data==1){
+						usernametips.html("");
+						usernameErr = false;
+					}
+				},
+				//请求失败，包含具体的错误信息
+		         error : function(e){
+		             console.log(e.status);
+		             console.log(e.responseText);
+		         }
+			});
+		}
+	});
+	$("#password").focus(function(){
+		var passwordtips=$("#passwordtips");
+		passwordtips.html("请填写密码, 最小长度为 6 个字符");
+		passwordtips.css("color","red");
+	});
+	$("#password").blur(function(){
+		var password = escape($("#password").val());
+			var passwordtips=$("#passwordtips");
+		if(password.length<6){
+			passwordtips.html("您输入的密码不合法！");
+			passwordtips.css("color","red");
+			passwordErr = true;
+		}else {
+			passwordtips.html("");
+			passwordErr = false;
+		}
+	});
+	$("#rePassword").focus(function(){
+		var rePasswordtips=$("#rePasswordtips");
+		rePasswordtips.html("请再次输入密码！");
+		rePasswordtips.css("color","red");
+	});
+	$('#rePassword').blur(function(){
+		var rePasswordtips = $('#rePasswordtips');
+ 		var password 	   = escape($('#password').val());
+ 		var rePassword 	   = escape($('#rePassword').val());
+		if (rePassword != "" && password == rePassword) {
+			rePasswordtips.html("");
+			rePasswordErr = false;
+		} 
+		else {
+			rePasswordtips.html('两次输入的密码不一致');
+			rePasswordtips.css('color','red');	
+			rePasswordErr = true;
+		}
+	});
+	$("#email").focus(function(){
+		var emailtips=$("#emailtips");
+		emailtips.html("请输入邮箱！");
+		emailtips.css("color","red");
+	});
+ 	$('#email').blur(function(){
+ 		var emailtips = $('#emailtips');
+ 		var email = $('#email').val();
+ 		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+ 	    if(!reg.test(email))
+ 	    {
+ 	    	emailtips.html('邮箱格式不对');
+	 		emailtips.css('color','red');
+	 		emailErr = true;
+ 	    }else{
+ 	    	emailtips.html("");
+ 	    	emailErr = false;
+ 	    }
+
+ 	});
+	$("#name").focus(function(){
+		var nametips=$("#nametips");
+		nametips.html("请输入少于30个字符串的姓名！");
+		nametips.css("color","red");
+	});
+	$("#name").blur(function(){
+		var name = escape($("#name").val());
+		var nametips=$("#nametips");
+		if(name.length>30){
+			nametips.html("您输入的姓名不合法！");
+			nametips.css("color","red");
+			nameErr = true;
+		}else {
+			nametips.html("");
+			nameErr = false;
+		}
+	});
+	$("#phone").focus(function(){
+		var phonetips=$("#phonetips");
+		phonetips.html("请输入您的手机号码！");
+		phonetips.css("color","red");
+	});
+	$("#phone").blur(function(){
+		var phone = escape($("#phone").val());
+		var phonetips=$("#phonetips");
+		var reg = /^1[3|4|5|7|8][0-9]{9}$/;
+		if(phone.length!=11){
+			phonetips.html("请输入11位的手机号码！");
+			phonetips.css("color","red");
+			phoneErr = true;
+		}else if(!reg.test(phone))
+ 	    {
+			phonetips.html('手机格式不对');
+			phonetips.css('color','red');
+	 		phoneErr = true;
+ 	    }else {
+ 	    	phonetips.html("");
+ 	    	phoneErr = false;
+		}
+	});
+	$("#addr").blur(function(){
+		var addr = $("#addr").val();
+		var addrtips=$("#addrtips");
+		if(addr!=''&&addr.length!=0){
+			addrtips.html("");
+			addrErr = false;
+		}else {
+			addrtips.html("请输入地址！");
+			addrtips.css("color","red");
+			addrErr = true;
+		}
+	});
+});
+$("#submit").click(function (){
+	if(usernameErr || passwordErr || rePasswordErr || emailErr || phoneErr || nameErr || addrErr){
+		alert("请填写正确的资料！");
+	}else {
+		$.ajax({
+			type:"POST",
+			url :"insUser",
+			dataType : "json",
+			data:{
+				username : $("#username").val(),
+				password : $("#password").val(),
+				rePassword : $("#rePassword").val(),
+				email : $("#email").val(),
+				phone : $("#phone").val(),
+				name : $("#name").val(),
+				addr : $("#addr").val()
+			},
+			success : function(data){
+				if(data==0){
+					alert("注册失败！");
+					window.location.href="regist.jsp";
+				}else if(data == 1){
+					alert("注册成功！");
+					if('${loginUser}'=='')
+						window.location.href="login.jsp";
+					else 
+						window.location.href="initIndex";
+				}
+			}, 
+			//请求失败，包含具体的错误信息
+	         error : function(e){
+	             console.log(e.status);
+	             console.log(e.responseText);
+	         }
+		})
+	}
+});
+</script>
 </html>
